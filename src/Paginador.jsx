@@ -1,10 +1,5 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
-import Grid from '@material-ui/core/Grid';
-import InputLabel from '@material-ui/core/InputLabel';
-import FormControl from '@material-ui/core/FormControl';
-import Select from '@material-ui/core/Select';
+import { Select, FormControl, InputLabel, Grid, Button, makeStyles } from '@material-ui/core';
 
 const useStyles = makeStyles(theme => ({
     button: {
@@ -20,9 +15,9 @@ const Pbttn = (props) => {
     return (
         <Button 
             fullWidth 
-            variant="outlined" 
-            color="secondary" 
-            onClick={props.onClick} 
+            variant="outlined"
+            color="secondary"
+            onClick={props.onClick}
             className={classes.button}
         >
             {props.text}

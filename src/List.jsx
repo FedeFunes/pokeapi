@@ -6,6 +6,7 @@ import ListItemText from '@material-ui/core/ListItemText';
 import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import Avatar from '@material-ui/core/Avatar';
 import capitalize from 'lodash/capitalize';
+import { Link } from "react-router-dom";
 // instalar solo capitalize
 // promise all()
 
@@ -24,9 +25,12 @@ const useStyles = makeStyles(theme => ({
 function MListItemAvatar({ item }) {
 
     const classes = useStyles();
+     function foo (a, b, c) {
+        // debugger;
+    }
 
     return (
-        <ListItem button>
+        <ListItem button to={`/pokemon/${item.name}`} component={Link}>
             <ListItemAvatar>
                 <Avatar
                     alt={`Avatar ${item.name}`}
@@ -44,8 +48,12 @@ export default function ({ list }) {
 
     const classes = useStyles();
 
+    function foo (a, b, c) {
+        debugger;
+    }
+
     return (
-        <List dense className={classes.root}>
+        <List dense className={classes.root}  onClick={foo} >
             {list.map((e, i) => {
                 return (
                     <MListItemAvatar key={i} item={e} />

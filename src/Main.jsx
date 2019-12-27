@@ -31,20 +31,22 @@ export default function (props) {
                 <Grid item xs={6} sm={3}>
                     <MLogo />
                 </Grid>
-                <Grid item xs={12} sm={6}>
-                    <Typography className={classes.typography} variant="caption" display="block" gutterBottom>
+            </Grid>
+            <Grid container justify="center" spacing={2}>
+               <Grid item xs={12} sm={6}>
+                    <Typography className={classes.typography} variant="caption" display="block">
                         Estos son los 956 Pokémons
                     </Typography>
                 </Grid>
             </Grid>
-            <Grid container spacing={3}>
+            <Grid container justify="center" spacing={3}>
                 <Grid item xs={12} sm={6}>
                     <Paper className={classes.paper}>
                         <List {...props} />
                     </Paper>
                 </Grid>
             </Grid>
-            <Grid container spacing={3}>
+            <Grid container justify="center" spacing={3}>
                 <Grid item xs={12} sm={6}>
                     <Paper className={classes.paper}>
                         <Paginador {...props}/>
