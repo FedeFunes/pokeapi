@@ -25,9 +25,6 @@ const useStyles = makeStyles(theme => ({
 function MListItemAvatar({ item }) {
 
     const classes = useStyles();
-     function foo (a, b, c) {
-        // debugger;
-    }
 
     return (
         <ListItem button to={`/pokemon/${item.name}`} component={Link}>
@@ -48,12 +45,8 @@ export default function ({ list }) {
 
     const classes = useStyles();
 
-    function foo (a, b, c) {
-        debugger;
-    }
-
     return (
-        <List dense className={classes.root}  onClick={foo} >
+        <List dense className={classes.root}>
             {list.map((e, i) => {
                 return (
                     <MListItemAvatar key={i} item={e} />

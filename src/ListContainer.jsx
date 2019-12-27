@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react';
+import { useParams, Route } from 'react-router-dom';
 import Main from './Main.jsx';
-import { BrowserRouter, useParams, Switch, Route } from 'react-router-dom';
+import Pokemon from './Pokemon.jsx';
 
 const POKE_URL = 'https://pokeapi.co/api/v2/pokemon';
 const NUMBER_ITEMS_PER_PAGE = 5;
 const Language = {
-    SPANISH: "es"
+    SPANISH: "es",
+    ENGLISH: "en"
 };
 
 async function getPokemons() {
@@ -29,11 +31,13 @@ async function getPokemon(name) {
         .then(r => r);
 
     console.log('POKEMON', pokemon);
-    hola.pokemon = pokemon;
-    hola.abilities = await getAbilities(pokemon, Language.SPANISH);
+
+    hola.name = pokemon.name;
+    hola.abilities = await getAbilities(pokemon, Language.ENGLISH);
     hola.images = getImageURL(pokemon);
     console.log('HOLA', hola)
 
+    return hola;
 }
 
 function getImageURL(pokemon) {
@@ -93,22 +97,6 @@ function getPokemonIdFromURL(url) {
     return url.match(/\/\d+\//g)[0].slice(1, -1)
 }
 
-function Pokemon(props) {
-  // We can use the `useParams` hook here to access
-  // the dynamic pieces of the URL.
-  let { id } = useParams();
-
-  useEffect(() => {
-    getPokemon(id);  
-  }, [id]);
-
-  return (
-    <div>
-      <h3>ID: {id}</h3>
-    </div>
-  );
-}
-
 export default function () {
 
     const [list, setList] = useState([]);
@@ -116,7 +104,10 @@ export default function () {
     const [currentPage, setCurrentPage] = useState(1);
     const [count, setCount] = useState(null);
     const [numberPages, setNumberPages] = useState(1);
-    const [selectedItem, setSelectedItem] = useState(null);
+    const [selectedItem, setSelectedItem] = useState({
+        images: [],
+        abilities: []
+    });
     const [selectedItems, setSelectedItems] = useState([]);
 
     function updateItemPerPage () {
@@ -145,13 +136,14 @@ export default function () {
         selectedItems,
         setSelectedItems,
         selectedItem,
-        setSelectedItem
+        setSelectedItem,
+        getPokemon
     };
 
     return (
         <>
             <Main {..._props} />
-            <Route path="/pokemon/:id" children={<Pokemon {..._props} />} />
+            <Route path="/pokemon/:name" children={<Pokemon {..._props} />} />
         </>
     );
 }
