@@ -41,13 +41,13 @@ function MListItemAvatar({ item }) {
     );
 }
 
-export default function ({ list }) {
+export default function ({ currentItems }) {
 
     const classes = useStyles();
 
     return (
         <List dense className={classes.root}>
-            {list.map((e, i) => {
+            {currentItems.map((e, i) => {
                 return (
                     <MListItemAvatar key={i} item={e} />
                 );

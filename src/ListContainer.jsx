@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, Route } from 'react-router-dom';
 import Main from './Main.jsx';
-import Pokemon from './Pokemon.jsx';
+import PokeDetail from './PokeDetail.jsx';
 
 const POKE_URL = 'https://pokeapi.co/api/v2/pokemon';
 const NUMBER_ITEMS_PER_PAGE = 5;
@@ -33,7 +33,7 @@ async function getPokemon(name) {
     console.log('POKEMON', pokemon);
 
     hola.name = pokemon.name;
-    hola.abilities = await getAbilities(pokemon, Language.ENGLISH);
+    hola.abilities = await getAbilities(pokemon, Language.SPANISH);
     hola.images = getImageURL(pokemon);
     console.log('HOLA', hola)
 
@@ -41,12 +41,11 @@ async function getPokemon(name) {
 }
 
 function getImageURL(pokemon) {
-    return Object.keys(pokemon.sprites).filter( k => pokemon.sprites[k] !== null).map(k => pokemon.sprites[k]);
+    return Object.keys(pokemon.sprites).filter(k => pokemon.sprites[k] !== null).map(k => pokemon.sprites[k]);
 }
 
 async function getAbilities(pokemon, language) {
 
-    // let props = ['effect_changes', 'effect_entries', 'flavor_text_entries', 'names'];
     let props = ['flavor_text_entries', 'names'];
 
     const abilities = await Promise.all(pokemon.abilities.map(e => {
@@ -56,7 +55,7 @@ async function getAbilities(pokemon, language) {
     let foo = abilities.map(a => {
 
         let ability = {};
-        
+
         props.forEach(p => {
             ability[p] = a[p].find(e => {
                 return e.language.name === language;
@@ -66,7 +65,6 @@ async function getAbilities(pokemon, language) {
         return ability;
     });
 
-    console.log(foo);
     return foo;
 }
 
@@ -110,7 +108,7 @@ export default function () {
     });
     const [selectedItems, setSelectedItems] = useState([]);
 
-    function updateItemPerPage () {
+    function updateItemPerPage() {
         setCurrentItems(getItemsPerPage(list, currentPage));
     }
 
@@ -132,7 +130,7 @@ export default function () {
         numberPages,
         count,
         updateItemPerPage,
-        list: currentItems,
+        currentItems,
         selectedItems,
         setSelectedItems,
         selectedItem,
@@ -143,7 +141,7 @@ export default function () {
     return (
         <>
             <Main {..._props} />
-            <Route path="/pokemon/:name" children={<Pokemon {..._props} />} />
+            <Route path="/pokemon/:name" children={<PokeDetail {..._props} />} />
         </>
     );
 }
