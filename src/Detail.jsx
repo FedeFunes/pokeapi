@@ -41,7 +41,7 @@ export default function ({ setSelectedItem, getPokemon, selectedItem }) {
     });
 
     return function () {
-      console.log('hola');
+      // Reseteo selectedItem
       setSelectedItem({
         abilities: [],
         images: []

@@ -1,7 +1,6 @@
 import React from 'react';
 import { Paper, Grid, Typography, makeStyles } from '@material-ui/core';
 import Pagination from './Pagination.jsx';
-
 import List from './List.jsx';
 
 const useStyles = makeStyles(theme => ({
@@ -15,18 +14,13 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-const MLogo = () => <img src="International_Pokémon_logo.svg.png" alt="Pokelogo" width="100%" />;
-
 export default function (props) {
+
     const classes = useStyles();
 
     return (
         <>
-            <Grid container justify="center" spacing={3}>
-                <Grid item xs={6} sm={3}>
-                    <MLogo />
-                </Grid>
-            </Grid>
+            {/* Cantida de pokemons */}
             <Grid container justify="center" spacing={2}>
                 <Grid item xs={12} sm={6}>
                     <Typography className={classes.typography} variant="caption" display="block">
@@ -34,6 +28,7 @@ export default function (props) {
                     </Typography>
                 </Grid>
             </Grid>
+            {/* Lista */}
             <Grid container justify="center" spacing={3}>
                 <Grid item xs={12} sm={6}>
                     <Paper className={classes.paper}>
@@ -41,6 +36,7 @@ export default function (props) {
                     </Paper>
                 </Grid>
             </Grid>
+            {/* Paginado */}
             <Grid container justify="center" spacing={3}>
                 <Grid item xs={12} sm={6}>
                     <Paper className={classes.paper}>

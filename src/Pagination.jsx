@@ -11,7 +11,9 @@ const useStyles = makeStyles(() => ({
 }));
 
 const Pbttn = (props) => {
+
     const classes = useStyles();
+
     return (
         <Button
             fullWidth
@@ -70,11 +72,13 @@ const MySelect = (props) => {
 
 export default function (props) {
 
+    // Aumenta 1 pag
     function oneMore() {
         if (props.currentPage <= props.numberPages)
             props.setCurrentPage(props.currentPage + 1);
     }
 
+    // Resta 1 pag
     function oneLess() {
         if (props.currentPage > 1)
             props.setCurrentPage(props.currentPage - 1);
@@ -82,12 +86,15 @@ export default function (props) {
 
     return (
         <Grid container spacing={1}>
+            {/* Boton Atras */}
             <Grid item xs={4}>
                 <Pbttn text="Atrás" onClick={oneLess} />
             </Grid>
+            {/* Paginas */}
             <Grid item xs={4}>
                 <MySelect {...props} />
             </Grid>
+            {/* Boton Siguiente */}
             <Grid item xs={4}>
                 <Pbttn text="Siguiente" onClick={oneMore} />
             </Grid>

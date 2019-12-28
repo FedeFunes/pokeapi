@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Route } from 'react-router-dom';
-import Layout from './Layout.jsx';
+import ListLayout from './ListLayout.jsx';
 import Detail from './Detail.jsx';
 
 const POKE_URL = 'https://pokeapi.co/api/v2/pokemon';
@@ -11,12 +11,21 @@ const Language = {
     ENGLISH: "en"
 };
 
+function fetchJSON(params) {
+
+}
+
+/**
+ * Obtiene lista de pokemons
+ */
 async function getPokemons() {
 
+    // Llamo a la API una primera vez para usar la prop count (total de pokemons)
     const count = await fetch(POKE_URL)
         .then(r => r.json())
         .then(r => r.count);
 
+    // Llamo a la API una segunda vez para obtener ahora la lista completa de pokemons con limit=count 
     let pokemons = await fetch(`${POKE_URL}?limit=${count}`)
         .then(r => r.json())
         .then(r => r.results);
@@ -24,6 +33,10 @@ async function getPokemons() {
     return pokemons;
 }
 
+/**
+ * Obtiene un pokemon en particular
+ * @param {string} name Nombre del pokemon
+ */
 async function getPokemon(name) {
 
     let rPokemon = {};
@@ -38,10 +51,19 @@ async function getPokemon(name) {
     return rPokemon;
 }
 
+/**
+ * Obtiene las URL de la imagenes del pokemon
+ * @param {string} pokemon Nombre del pokemon 
+ */
 function getImageURL(pokemon) {
     return Object.keys(pokemon.sprites).filter(k => pokemon.sprites[k] !== null).map(k => pokemon.sprites[k]);
 }
 
+/**
+ * Obtiene las habilidades del pokemon en el idioma deseado
+ * @param {string} pokemon Nombre del pokemon 
+ * @param {string} language Idioma 
+ */
 async function getAbilities(pokemon, language) {
 
     let props = ['flavor_text_entries', 'names'];
@@ -66,6 +88,10 @@ async function getAbilities(pokemon, language) {
     return _abilities;
 }
 
+/**
+ * Agregra informacion extra al pokemon: Id y Sprites
+ * @param {Array<object>} pokemons Lista de pokemons 
+ */
 function addExtraInfo(pokemons) {
     pokemons.forEach(e => {
         const id = getPokemonIdFromURL(e.url);
@@ -76,16 +102,29 @@ function addExtraInfo(pokemons) {
     })
 }
 
+/**
+ * Obtiene la cantidad de pags que va tener el paginado 
+ * @param {number} count Cantidad de elementos 
+ */
 function getNumberPages(count) {
     return Math.ceil(count / NUMBER_ITEMS_PER_PAGE);
 }
 
+/**
+ * Obtiene los elementos de una determinada pag
+ * @param {Array<object>} pokemons Lista de pokemons
+ * @param {number} pageNumber Nro de pag
+ */
 function getItemsPerPage(pokemons, pageNumber) {
     let items = pokemons.slice((pageNumber - 1) * NUMBER_ITEMS_PER_PAGE, pageNumber * NUMBER_ITEMS_PER_PAGE);
     addExtraInfo(items);
     return items;
 }
 
+/**
+ * Obtiene el id del pokemon de la URL
+ * @param {*} url URL
+ */
 function getPokemonIdFromURL(url) {
     return url.match(/\/\d+\//g)[0].slice(1, -1)
 }
@@ -103,11 +142,8 @@ export default function () {
     });
     const [selectedItems, setSelectedItems] = useState([]);
 
-    function updateItemPerPage() {
-        setCurrentItems(getItemsPerPage(list, currentPage));
-    }
-
     useEffect(() => {
+        // Obtengo lista de pokemons
         getPokemons().then(pokemons => {
             setList(pokemons);
             setCount(pokemons.length);
@@ -116,6 +152,7 @@ export default function () {
     }, []);
 
     useEffect(() => {
+        // Actualizo lista de elementos visibles
         setCurrentItems(getItemsPerPage(list, currentPage));
     }, [currentPage, list]);
 
@@ -124,7 +161,6 @@ export default function () {
         setCurrentPage,
         numberPages,
         count,
-        updateItemPerPage,
         currentItems,
         selectedItems,
         setSelectedItems,
@@ -135,7 +171,9 @@ export default function () {
 
     return (
         <>
-            <Route exact path="/" children={<Layout {..._props} />} />
+            {/* Lista de pokemons */}
+            <Route exact path="/" children={<ListLayout {..._props} />} />
+            {/* Detalle del pokemon */}
             <Route path="/pokemon/:name" children={<Detail {..._props} />} />
         </>
     );

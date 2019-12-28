@@ -1,6 +1,6 @@
 import React from 'react';
 import PokeList from './PokeList.jsx';
-import { makeStyles } from '@material-ui/core';
+import { makeStyles, Grid } from '@material-ui/core';
 
 const useStyles = makeStyles(theme => ({
 	root: {
@@ -16,6 +16,12 @@ function App() {
 
 	return (
 		<div className={classes.root}>
+			<Grid container justify="center" spacing={3}>
+				<Grid item xs={6} sm={3}>
+					{/* LOGO */}
+					<img src="International_Pokémon_logo.svg" alt="Pokelogo" width="100%" />
+				</Grid>
+			</Grid>
 			<PokeList />
 		</div>
 	);
