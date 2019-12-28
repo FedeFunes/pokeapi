@@ -1,11 +1,5 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import GridList from '@material-ui/core/GridList';
-import GridListTile from '@material-ui/core/GridListTile';
-import GridListTileBar from '@material-ui/core/GridListTileBar';
-import IconButton from '@material-ui/core/IconButton';
-// import StarBorderIcon from '@material-ui/icons/StarBorder';
-// import tileData from './tileData';
+import { makeStyles, GridList, GridListTile } from '@material-ui/core';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -19,14 +13,10 @@ const useStyles = makeStyles(theme => ({
     flexWrap: 'nowrap',
     transform: 'translateZ(0)',
   },
-  title: {
-    color: theme.palette.primary.light,
-  },
   tile: {
     border: '1px lightgray solid',
     borderRadius: '25px'
   }
-
 }));
 
 export default function SingleLineGridList({ src }) {

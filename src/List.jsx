@@ -8,7 +8,6 @@ import Avatar from '@material-ui/core/Avatar';
 import capitalize from 'lodash/capitalize';
 import { Link } from "react-router-dom";
 // instalar solo capitalize
-// promise all()
 
 const useStyles = makeStyles(theme => ({
     root: {

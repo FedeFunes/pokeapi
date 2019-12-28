@@ -1,5 +1,5 @@
 import React from 'react';
-import ListContainer from './ListContainer.jsx';
+import PokeList from './PokeList.jsx';
 import { makeStyles } from '@material-ui/core';
 
 const useStyles = makeStyles(theme => ({
@@ -16,7 +16,7 @@ function App() {
 
 	return (
 		<div className={classes.root}>
-			<ListContainer />
+			<PokeList />
 		</div>
 	);
 }

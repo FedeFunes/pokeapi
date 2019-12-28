@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { useParams, Route } from 'react-router-dom';
-import Main from './Main.jsx';
-import PokeDetail from './PokeDetail.jsx';
+import { Route } from 'react-router-dom';
+import Layout from './Layout.jsx';
+import Detail from './Detail.jsx';
 
 const POKE_URL = 'https://pokeapi.co/api/v2/pokemon';
+const SPRITE_URL = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon`;
 const NUMBER_ITEMS_PER_PAGE = 5;
 const Language = {
     SPANISH: "es",
@@ -25,19 +26,16 @@ async function getPokemons() {
 
 async function getPokemon(name) {
 
-    let hola = {};
+    let rPokemon = {};
     const pokemon = await fetch(POKE_URL + '/' + name)
         .then(r => r.json())
         .then(r => r);
 
-    console.log('POKEMON', pokemon);
+    rPokemon.name = pokemon.name;
+    rPokemon.abilities = await getAbilities(pokemon, Language.SPANISH);
+    rPokemon.images = getImageURL(pokemon);
 
-    hola.name = pokemon.name;
-    hola.abilities = await getAbilities(pokemon, Language.SPANISH);
-    hola.images = getImageURL(pokemon);
-    console.log('HOLA', hola)
-
-    return hola;
+    return rPokemon;
 }
 
 function getImageURL(pokemon) {
@@ -52,7 +50,7 @@ async function getAbilities(pokemon, language) {
         return fetch(e.ability.url).then(r => r.json());
     }));
 
-    let foo = abilities.map(a => {
+    let _abilities = abilities.map(a => {
 
         let ability = {};
 
@@ -65,13 +63,10 @@ async function getAbilities(pokemon, language) {
         return ability;
     });
 
-    return foo;
+    return _abilities;
 }
 
 function addExtraInfo(pokemons) {
-
-    const SPRITE_URL = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon`;
-
     pokemons.forEach(e => {
         const id = getPokemonIdFromURL(e.url);
         e.id = getPokemonIdFromURL(e.url);
@@ -140,8 +135,8 @@ export default function () {
 
     return (
         <>
-            <Main {..._props} />
-            <Route path="/pokemon/:name" children={<PokeDetail {..._props} />} />
+            <Route exact path="/" children={<Layout {..._props} />} />
+            <Route path="/pokemon/:name" children={<Detail {..._props} />} />
         </>
     );
 }

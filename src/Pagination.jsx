@@ -1,7 +1,7 @@
 import React from 'react';
 import { Select, FormControl, InputLabel, Grid, Button, makeStyles } from '@material-ui/core';
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles(() => ({
     button: {
         height: '100%'
     },
@@ -13,8 +13,8 @@ const useStyles = makeStyles(theme => ({
 const Pbttn = (props) => {
     const classes = useStyles();
     return (
-        <Button 
-            fullWidth 
+        <Button
+            fullWidth
             variant="outlined"
             color="secondary"
             onClick={props.onClick}
@@ -57,7 +57,7 @@ const MySelect = (props) => {
 
                         for (let i = 0; i < props.numberPages; i++) {
                             value = i + 1;
-                            options.push(<option value={value} key={value}>{value}</option>);   
+                            options.push(<option value={value} key={value}>{value}</option>);
                         }
 
                         return options;
@@ -71,24 +71,24 @@ const MySelect = (props) => {
 export default function (props) {
 
     function oneMore() {
-        if (props.currentPage <= props.numberPages) 
+        if (props.currentPage <= props.numberPages)
             props.setCurrentPage(props.currentPage + 1);
     }
 
     function oneLess() {
-        if (props.currentPage > 1) 
+        if (props.currentPage > 1)
             props.setCurrentPage(props.currentPage - 1);
     }
 
     return (
         <Grid container spacing={1}>
-            <Grid item xs={4} sm={5}>
+            <Grid item xs={4}>
                 <Pbttn text="Atrás" onClick={oneLess} />
             </Grid>
-            <Grid item xs={4} sm={2}>
+            <Grid item xs={4}>
                 <MySelect {...props} />
             </Grid>
-            <Grid item xs={4} sm={5}>
+            <Grid item xs={4}>
                 <Pbttn text="Siguiente" onClick={oneMore} />
             </Grid>
         </Grid>

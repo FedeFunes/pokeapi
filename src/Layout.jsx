@@ -1,6 +1,7 @@
 import React from 'react';
 import { Paper, Grid, Typography, makeStyles } from '@material-ui/core';
-import Paginador from './Paginador.jsx';
+import Pagination from './Pagination.jsx';
+
 import List from './List.jsx';
 
 const useStyles = makeStyles(theme => ({
@@ -14,7 +15,7 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-const MLogo = () => <img src="International_Pokémon_logo.svg.png" alt="Smiley face" width="100%" />;
+const MLogo = () => <img src="International_Pokémon_logo.svg.png" alt="Pokelogo" width="100%" />;
 
 export default function (props) {
     const classes = useStyles();
@@ -29,7 +30,7 @@ export default function (props) {
             <Grid container justify="center" spacing={2}>
                 <Grid item xs={12} sm={6}>
                     <Typography className={classes.typography} variant="caption" display="block">
-                        Estos son los 956 Pokémons
+                        Existen {props.count} Pokémons
                     </Typography>
                 </Grid>
             </Grid>
@@ -43,7 +44,7 @@ export default function (props) {
             <Grid container justify="center" spacing={3}>
                 <Grid item xs={12} sm={6}>
                     <Paper className={classes.paper}>
-                        <Paginador {...props} />
+                        <Pagination {...props} />
                     </Paper>
                 </Grid>
             </Grid>
