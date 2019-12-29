@@ -20,7 +20,7 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-function MListItemAvatar({ item, to }) {
+function ListItemAvtr({ item, to }) {
 
     const classes = useStyles();
 
@@ -47,7 +47,7 @@ export default function ({ currentItems }) {
         <List dense className={classes.root}>
             {currentItems.map((e, i) => {
                 return (
-                    <MListItemAvatar key={i} item={e} to={`/pokemon/${e.name}`} />
+                    <ListItemAvtr key={i} item={e} to={`/pokemon/${e.name}`} />
                 );
             })}
         </List>

@@ -7,6 +7,10 @@ const POKE_URL = 'https://pokeapi.co/api/v2/pokemon';
 const SPRITE_URL = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon`;
 const NUMBER_ITEMS_PER_PAGE = 5;
 
+/**
+ * Hace un fetch con formato JSON
+ * @param {string} url 
+ */
 async function fetchJSON(url) {
     return await fetch(url).then(r => r.json());
 }
@@ -66,6 +70,11 @@ async function getAbilities(pokemon, language) {
     return abilities;
 }
 
+/**
+ * Obtiene habilidades por un idioma determinado
+ * @param {Array<object>} abilities 
+ * @param {string} language 
+ */
 function getAbilitiesByLanguage(abilities, language) {
 
     let props = ['flavor_text_entries', 'names'];
