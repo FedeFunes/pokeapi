@@ -1,5 +1,6 @@
 import React from 'react';
-import { Select, FormControl, InputLabel, Grid, Button, makeStyles } from '@material-ui/core';
+import { Grid, Button, makeStyles } from '@material-ui/core';
+import SelectCustom from './SelectCustom';
 
 const useStyles = makeStyles(() => ({
     button: {
@@ -27,38 +28,9 @@ const Pbttn = (props) => {
     )
 }
 
-const MySelect = (props) => {
+export default function (props) {
 
     const classes = useStyles();
-    const inputLabel = React.useRef(null);
-    const [labelWidth, setLabelWidth] = React.useState(0);
-
-    React.useEffect(() => {
-        setLabelWidth(inputLabel.current.offsetWidth);
-    }, [])
-
-    function handleChange(evt) {
-        props.setCurrentPage(parseInt(evt.target.value));
-    }
-
-    return (
-        <FormControl fullWidth variant="outlined">
-            <InputLabel ref={inputLabel}>{props.label}</InputLabel>
-            <Select
-                fullWidth
-                classes={{ select: classes.select }}
-                native
-                value={props.value}
-                onChange={props.onChange}
-                labelWidth={labelWidth}
-            >
-                {props.children}
-            </Select>
-        </FormControl>
-    );
-}
-
-export default function (props) {
 
     // Aumenta 1 pag
     function oneMore() {
@@ -84,7 +56,12 @@ export default function (props) {
             </Grid>
             {/* Paginas */}
             <Grid item xs={4}>
-                <MySelect label={'Page'} onChange={handleChange} value={props.currentPage}>
+                <SelectCustom
+                    label={'Page'}
+                    onChange={handleChange}
+                    value={props.currentPage}
+                    classes={{ select: classes.select }}
+                >
                     {
                         (() => {
                             let options = [];
@@ -98,7 +75,7 @@ export default function (props) {
                             return options;
                         })()
                     }
-                </MySelect>
+                </SelectCustom>
             </Grid>
             {/* Boton Siguiente */}
             <Grid item xs={4}>

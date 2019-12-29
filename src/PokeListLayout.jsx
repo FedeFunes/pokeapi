@@ -20,7 +20,7 @@ export default function (props) {
 
     return (
         <>
-            {/* Cantida de pokemons */}
+            {/* Cantidad de pokemons */}
             <Grid container justify="center" spacing={2}>
                 <Grid item xs={12} sm={6}>
                     <Typography className={classes.typography} variant="caption" display="block">

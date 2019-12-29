@@ -2,9 +2,9 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { Grid, makeStyles, Paper, Typography } from '@material-ui/core';
-import { Select, FormControl, InputLabel, Button, withStyles } from '@material-ui/core';
 import Image from './Image.jsx';
 import capitalize from 'lodash/capitalize';
+import SelectCustom from './SelectCustom';
 
 const useStyles = makeStyles(theme => ({
   paper: {
@@ -31,9 +31,9 @@ const useStyles = makeStyles(theme => ({
   },
   "outlined": {
     padding: '8px 14px'
-  }, 
+  },
   select: {
-    fontSize: '0.7rem'  
+    fontSize: '0.7rem'
   }
 }));
 
@@ -47,46 +47,11 @@ const Language = {
   german: { code: 'de', desc: 'German' },
 };
 
-const MySelect = (props) => {
-
-  const classes = useStyles();
-  const inputLabel = React.useRef(null);
-  const [labelWidth, setLabelWidth] = React.useState(0);
-
-  React.useEffect(() => {
-    setLabelWidth(inputLabel.current.offsetWidth);
-  }, [])
-
-  function handleChange(evt) {
-    props.setCurrentPage(parseInt(evt.target.value));
-  }
-
-  return (
-    <FormControl 
-      fullWidth 
-      variant="outlined"
-    >
-      <InputLabel ref={inputLabel}>{props.label}</InputLabel>
-      <Select
-        fullWidth
-        native
-        className={classes.select}
-        classes={{ outlined: classes.outlined}}
-        value={props.value}
-        onChange={props.onChange}
-        labelWidth={labelWidth}
-      >
-        {props.children}
-      </Select>
-    </FormControl>
-  );
-}
-
-export default function ({ setSelectedItem, getPokemon, selectedItem }) {
+export default function ({ setSelectedItem, getPokemon, selectedItem, getAbilitiesByLanguage }) {
 
   const classes = useStyles();
   let { name } = useParams();
-  const [language, setLanguage] = useState('es')
+  const [language, setLanguage] = useState(Language.spanish.code)
 
   useEffect(() => {
     getPokemon(name, language).then(pokemon => {
@@ -95,6 +60,7 @@ export default function ({ setSelectedItem, getPokemon, selectedItem }) {
 
     return function () {
       // Reseteo selectedItem
+      console.log('HOLA');
       setSelectedItem({
         abilities: [],
         images: []
@@ -103,8 +69,8 @@ export default function ({ setSelectedItem, getPokemon, selectedItem }) {
   }, [name, setSelectedItem, getPokemon, language]);
 
   function handleChange(evt) {
-      setLanguage(evt.target.value);
-    }
+    setLanguage(evt.target.value);
+  }
 
   return (
     <Grid container justify="center" spacing={3}>
@@ -137,13 +103,19 @@ export default function ({ setSelectedItem, getPokemon, selectedItem }) {
           }
           <Grid container justify="flex-end" spacing={3} p={5}>
             <Grid item xs={6} sm={3}>
-              <MySelect label={''} onChange={handleChange} value={null} >
+              <SelectCustom
+                label={''}
+                onChange={handleChange}
+                value={language}
+                classes={{ outlined: classes.outlined }}
+                className={classes.select}
+              >
                 {
                   Object.values(Language).map((e, i) => {
                     return <option value={e.code} key={e.code}>{e.desc}</option>
                   })
                 }
-              </MySelect>
+              </SelectCustom>
             </Grid>
           </Grid>
         </Paper>
