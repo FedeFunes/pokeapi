@@ -7,8 +7,12 @@ const POKE_URL = 'https://pokeapi.co/api/v2/pokemon';
 const SPRITE_URL = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon`;
 const NUMBER_ITEMS_PER_PAGE = 5;
 const Language = {
-    SPANISH: "es",
-    ENGLISH: "en"
+    spanish: { CODE: 'es', DESC: 'Spanish' },
+    english: { CODE: 'en', DESC: 'English' },
+    french: { CODE: 'fr', DESC: 'French' },
+    italian: { CODE: 'it', DESC: 'Italian' },
+    japanese: { CODE: 'ja', DESC: 'Japanese' },
+    korean: { CODE: 'ko', DESC: 'Korean' }
 };
 
 function fetchJSON(params) {
@@ -36,8 +40,9 @@ async function getPokemons() {
 /**
  * Obtiene un pokemon en particular
  * @param {string} name Nombre del pokemon
+ * @param {string} language Idioma
  */
-async function getPokemon(name) {
+async function getPokemon(name, language) {
 
     let rPokemon = {};
     const pokemon = await fetch(POKE_URL + '/' + name)
@@ -45,7 +50,7 @@ async function getPokemon(name) {
         .then(r => r);
 
     rPokemon.name = pokemon.name;
-    rPokemon.abilities = await getAbilities(pokemon, Language.SPANISH);
+    rPokemon.abilities = await getAbilities(pokemon, language);
     rPokemon.images = getImageURL(pokemon);
 
     return rPokemon;
@@ -166,7 +171,8 @@ export default function () {
         setSelectedItems,
         selectedItem,
         setSelectedItem,
-        getPokemon
+        getPokemon,
+        languages: Language
     };
 
     return (

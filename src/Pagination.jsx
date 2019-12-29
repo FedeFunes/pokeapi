@@ -43,28 +43,16 @@ const MySelect = (props) => {
 
     return (
         <FormControl fullWidth variant="outlined">
-            <InputLabel ref={inputLabel} htmlFor="outlined-age-native-simple">Page</InputLabel>
+            <InputLabel ref={inputLabel}>{props.label}</InputLabel>
             <Select
                 fullWidth
                 classes={{ select: classes.select }}
                 native
-                value={props.currentPage}
-                onChange={handleChange}
+                value={props.value}
+                onChange={props.onChange}
                 labelWidth={labelWidth}
             >
-                {
-                    (() => {
-                        let options = [];
-                        let value = null;
-
-                        for (let i = 0; i < props.numberPages; i++) {
-                            value = i + 1;
-                            options.push(<option value={value} key={value}>{value}</option>);
-                        }
-
-                        return options;
-                    })()
-                }
+                {props.children}
             </Select>
         </FormControl>
     );
@@ -84,6 +72,10 @@ export default function (props) {
             props.setCurrentPage(props.currentPage - 1);
     }
 
+    function handleChange(evt) {
+        props.setCurrentPage(parseInt(evt.target.value));
+    }
+
     return (
         <Grid container spacing={1}>
             {/* Boton Atras */}
@@ -92,7 +84,21 @@ export default function (props) {
             </Grid>
             {/* Paginas */}
             <Grid item xs={4}>
-                <MySelect {...props} />
+                <MySelect label={'Page'} onChange={handleChange} value={props.currentPage}>
+                    {
+                        (() => {
+                            let options = [];
+                            let value = null;
+
+                            for (let i = 0; i < props.numberPages; i++) {
+                                value = i + 1;
+                                options.push(<option value={value} key={value}>{value}</option>);
+                            }
+
+                            return options;
+                        })()
+                    }
+                </MySelect>
             </Grid>
             {/* Boton Siguiente */}
             <Grid item xs={4}>

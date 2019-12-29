@@ -24,7 +24,7 @@ export default function (props) {
             <Grid container justify="center" spacing={2}>
                 <Grid item xs={12} sm={6}>
                     <Typography className={classes.typography} variant="caption" display="block">
-                        Existen {props.count} Pokémons
+                        There are {props.count} Pokémons
                     </Typography>
                 </Grid>
             </Grid>
