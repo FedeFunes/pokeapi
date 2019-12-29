@@ -47,7 +47,7 @@ const Language = {
   german: { code: 'de', desc: 'German' },
 };
 
-export default function ({ setSelectedItem, getPokemon, selectedItem, getAbilitiesByLanguage }) {
+export default function ({ setSelectedItem, getPokemon, selectedItem }) {
 
   const classes = useStyles();
   let { name } = useParams();

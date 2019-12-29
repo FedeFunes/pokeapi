@@ -8,8 +8,8 @@ function Root() {
 
     return (
         <>
+            <CssBaseline />
             <BrowserRouter>
-                <CssBaseline />
                 <Switch>
                     <App />
                 </Switch>

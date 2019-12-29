@@ -28,24 +28,24 @@ const Pbttn = (props) => {
     )
 }
 
-export default function (props) {
+export default function ({ currentPage, setCurrentPage, numberPages }) {
 
     const classes = useStyles();
 
     // Aumenta 1 pag
     function oneMore() {
-        if (props.currentPage <= props.numberPages)
-            props.setCurrentPage(props.currentPage + 1);
+        if (currentPage <= numberPages)
+            setCurrentPage(currentPage + 1);
     }
 
     // Resta 1 pag
     function oneLess() {
-        if (props.currentPage > 1)
-            props.setCurrentPage(props.currentPage - 1);
+        if (currentPage > 1)
+            setCurrentPage(currentPage - 1);
     }
 
     function handleChange(evt) {
-        props.setCurrentPage(parseInt(evt.target.value));
+        setCurrentPage(parseInt(evt.target.value));
     }
 
     return (
@@ -59,7 +59,7 @@ export default function (props) {
                 <SelectCustom
                     label={'Page'}
                     onChange={handleChange}
-                    value={props.currentPage}
+                    value={currentPage}
                     classes={{ select: classes.select }}
                 >
                     {
@@ -67,7 +67,7 @@ export default function (props) {
                             let options = [];
                             let value = null;
 
-                            for (let i = 0; i < props.numberPages; i++) {
+                            for (let i = 0; i < numberPages; i++) {
                                 value = i + 1;
                                 options.push(<option value={value} key={value}>{value}</option>);
                             }

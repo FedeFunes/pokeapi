@@ -136,7 +136,6 @@ export default function () {
         images: [],
         abilities: []
     });
-    const [selectedItems, setSelectedItems] = useState([]);
 
     useEffect(() => {
         // Obtengo lista de pokemons
@@ -158,8 +157,6 @@ export default function () {
         numberPages,
         count,
         currentItems,
-        selectedItems,
-        setSelectedItems,
         selectedItem,
         setSelectedItem,
         getPokemon
