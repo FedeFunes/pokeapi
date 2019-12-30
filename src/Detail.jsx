@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom';
 import { Grid, makeStyles, Paper, Typography } from '@material-ui/core';
 import Image from './Image.jsx';
 import capitalize from 'lodash/capitalize';
-import SelectCustom from './SelectCustom';
+import SelectCustom from './SelectCustom.jsx';
 
 const useStyles = makeStyles(theme => ({
   paper: {

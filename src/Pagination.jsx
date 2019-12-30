@@ -1,6 +1,6 @@
 import React from 'react';
 import { Grid, Button, makeStyles } from '@material-ui/core';
-import SelectCustom from './SelectCustom';
+import SelectCustom from './SelectCustom.jsx';
 
 const useStyles = makeStyles(() => ({
     button: {
