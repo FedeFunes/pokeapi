@@ -19,7 +19,7 @@ function App() {
 			<Grid container justify="center" spacing={3}>
 				<Grid item xs={6} sm={3}>
 					{/* LOGO */}
-					<img src="International_Pokémon_logo.svg" alt="Pokelogo" width="100%" />
+					<img src="pokelogo.svg" alt="Pokelogo" width="100%" />
 				</Grid>
 			</Grid>
 			<PokeList />
