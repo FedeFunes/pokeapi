@@ -4,6 +4,7 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import { HashRouter, Switch } from 'react-router-dom';
 import App from './App';
 import 'typeface-roboto';
+import 'react-app-polyfill/ie11';
 
 function Root() {
 
