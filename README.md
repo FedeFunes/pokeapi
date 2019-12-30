@@ -6,6 +6,3 @@ v1.0
 
 Mejoras que quedaron pendientes por falta de tiempo:
 - Webpack + Babel
-- PropTypes
-- ESLint
-- Prettier
