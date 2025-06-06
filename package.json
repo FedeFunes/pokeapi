@@ -31,7 +31,7 @@
     "webpack": "^4.41.2",
     "webpack-cli": "^3.3.10",
     "webpack-dashboard": "^2.0.0",
-    "webpack-dev-server": "^3.9.0",
+    "webpack-dev-server": "^5.2.1",
     "webpack-merge": "^4.2.2",
     "webpack-monitor": "^1.0.14",
     "webpack-stats-plugin": "^0.2.1",
