@@ -8,7 +8,7 @@
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
     "react-router-dom": "^5.1.2",
-    "react-scripts": "3.3.0",
+    "react-scripts": "5.0.1",
     "typeface-roboto": "0.0.54"
   },
   "devDependencies": {
@@ -31,7 +31,7 @@
     "webpack": "^4.41.2",
     "webpack-cli": "^3.3.10",
     "webpack-dashboard": "^2.0.0",
-    "webpack-dev-server": "^3.9.0",
+    "webpack-dev-server": "^5.2.2",
     "webpack-merge": "^4.2.2",
     "webpack-monitor": "^1.0.14",
     "webpack-stats-plugin": "^0.2.1",
